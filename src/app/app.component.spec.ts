@@ -13,4 +13,23 @@ describe('AppComponent', () => {
 		const app = fixture.componentInstance;
 		expect(app).toBeTruthy();
 	});
-});
+
+	it('mouse move set coordinates', () => {
+		const fixture = TestBed.createComponent(AppComponent);
+		const app = fixture.componentInstance;
+		const event =  {clientX: 20, clientY: 30};
+		app.onMouseMove(event)
+		expect(app.xPos).toEqual('20px');
+		expect(app.yPos).toEqual('30px');
+	});
+
+	it('click toggles radius', () => {
+		const fixture = TestBed.createComponent(AppComponent);
+		const app = fixture.componentInstance;
+		expect(app.radius).toEqual('0px')
+		app.onClick();
+		expect(app.radius).toEqual('250px')
+		app.onClick();
+		expect(app.radius).toEqual('0px')
+	});
+}); 

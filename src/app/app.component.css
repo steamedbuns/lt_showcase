@@ -5,10 +5,12 @@
 	background-image: radial-gradient(
 		circle var(--radius) at var(--mouse-x) var(--mouse-y),
 		#ffffff 0%,
-		#ffffff31 45%,
+		#ecececd7 35%,
+		#ffffff31 65%,
 		transparent 100%
 	);
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	cursor: none;
 }

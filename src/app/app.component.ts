@@ -12,13 +12,19 @@ export class AppComponent {
 	private secretService = inject(SecretService);
 
 	currentKey: WritableSignal<string | null> = signal(this.secretService.getKey());
+	flashlightOn: boolean = false;
 
-	@HostBinding('style.--radius') radius: string = '250px';
+	@HostBinding('style.--radius') radius: string = '0px';
 	@HostBinding('style.--mouse-x') xPos: string = '0px';
 	@HostBinding('style.--mouse-y') yPos: string = '0px';
 
-	onMouseMove(event: MouseEvent) {
+	onMouseMove(event: { clientX: any; clientY: any; }) {
 		this.xPos = `${event.clientX}px`;
 		this.yPos = `${event.clientY}px`;
+	}
+
+	onClick() {
+		this.flashlightOn = !this.flashlightOn;
+		this.radius = this.flashlightOn ? '250px' : '0px';
 	}
 }
