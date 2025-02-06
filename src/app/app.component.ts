@@ -1,17 +1,16 @@
-import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { SecretService } from './services/secret.service';
+import { BaseHeaderComponent } from "./base-header/base-header.component";
 
 @Component({
 	selector: 'app-root',
-	imports: [NgIf],
 	templateUrl: './app.component.html',
-	styleUrl: './app.component.css'
+	styleUrl: './app.component.css',
+ 	imports: [BaseHeaderComponent]
 })
 export class AppComponent {
-	title = 'lt-showcase';
-	message = ''
+	private secretService = inject(SecretService);
 
-	onClick() {
-		this.message = 'Hello World'
-	}
+	title: string = 'lt-showcase';
+	currentKey: WritableSignal<string | null> = signal(this.secretService.getKey());
 }

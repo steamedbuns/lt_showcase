@@ -30,22 +30,6 @@ describe('AppComponent', () => {
 	it('default empty message', () => {
 		const fixture = TestBed.createComponent(AppComponent);
 		const app = fixture.componentInstance;
-		expect(app.message).toEqual('');
-	});
-
-	it('should have message after button press', () => {
-		const fixture = TestBed.createComponent(AppComponent);
-		const app = fixture.componentInstance;
-		app.onClick();
-		expect(app.message).toEqual('Hello World');
-	});
-
-	it('should render message', () => {
-		const fixture = TestBed.createComponent(AppComponent);
-		const app = fixture.componentInstance;
-		app.onClick();
-		fixture.detectChanges();
-		const compiled = fixture.nativeElement as HTMLElement;
-		expect(compiled.querySelector('h2')?.textContent).toContain('Hello World');
+		expect(app.currentKey).toEqual('');
 	});
 });
