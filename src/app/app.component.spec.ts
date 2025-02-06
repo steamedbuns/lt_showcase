@@ -32,4 +32,4 @@ describe('AppComponent', () => {
 		app.onClick();
 		expect(app.radius).toEqual('0px')
 	});
-}); 
+});
