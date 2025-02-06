@@ -14,7 +14,10 @@ export class SecretService {
 	}
 
 	// Get the api key
-	public getKey(): string | null {
-		return sessionStorage.getItem(this.SECRET_KEY);
+	public getKey(): string {
+		const result = sessionStorage.getItem(this.SECRET_KEY);
+		if (result == null)
+			return '';
+		return result;
 	}
 }

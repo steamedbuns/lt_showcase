@@ -17,5 +17,7 @@ describe('SecretService', () => {
 	it('setter getter', () => {
 		service.setKey('ASDF');
 		expect(service.getKey()).toEqual('ASDF');
+		service.setKey('');
+		expect(service.getKey()).toEqual('');
 	});
 });
