@@ -27,6 +27,7 @@ label, input, button {
 
 label, button {
 	user-select: none;
+	padding-right: 5px;
 }
 
 input, button {
