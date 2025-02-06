@@ -1,6 +1,6 @@
-<div class="container-fluid">
-	<div class="row align-items-end">
-		<div class="col-auto py-2">
+<div class="container">
+	<div class="row">
+		<div class="col">
 			<svg width="206px" height="55px" id="svg__logo" viewBox="0 0 206 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 				<title>Lean TECHniques</title>
 				<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -25,9 +25,16 @@
 					</g>
 				</g>
 			</svg>
-		</div>
-		<div class="col-auto py-2">
 			<h1>Photo Album Tech Showcase</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<label for="api-key">
+				Api Key:
+				<input id="api-key" type="text" (click)="onInputClick($event)" />
+			</label>
+			<button (click)="onButtonClick($event)">Login</button>
 		</div>
 	</div>
 </div>

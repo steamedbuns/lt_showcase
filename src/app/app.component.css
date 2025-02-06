@@ -11,31 +11,5 @@
 	display: grid;
 	align-items: center;
 	justify-content: center;
-	cursor: none;
-}
-
-.container {
-	display: grid;
-	row-gap: 50px;
-}
-
-label, input, button {
-	color: #181818;
-	background-color: #ffffff00;
 	cursor: var(--cursor);
-}
-
-label, button {
-	user-select: none;
-	padding-right: 5px;
-}
-
-input, button {
-	border: #181818;
-	border-style: solid;
-}
-
-button {
-	border: #181818;
-	border-style: solid;
 }

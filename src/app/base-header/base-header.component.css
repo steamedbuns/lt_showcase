@@ -3,3 +3,29 @@ h1 {
 	margin: 0;
 	user-select: none;
 }
+
+.container {
+	display: grid;
+	row-gap: 50px;
+}
+
+label, input, button {
+	color: #181818;
+	background-color: #ffffff00;
+	cursor: var(--cursor);
+}
+
+label, button {
+	user-select: none;
+	padding-right: 5px;
+}
+
+input, button {
+	border: #181818;
+	border-style: solid;
+}
+
+button {
+	border: #181818;
+	border-style: solid;
+}

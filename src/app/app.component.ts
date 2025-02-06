@@ -1,5 +1,4 @@
-import { Component, HostBinding, WritableSignal, inject, signal } from '@angular/core';
-import { SecretService } from './services/secret.service';
+import { Component, HostBinding } from '@angular/core';
 import { BaseHeaderComponent } from "./base-header/base-header.component";
 
 @Component({
@@ -9,9 +8,6 @@ import { BaseHeaderComponent } from "./base-header/base-header.component";
  	imports: [BaseHeaderComponent]
 })
 export class AppComponent {
-	private secretService = inject(SecretService);
-
-	currentKey: WritableSignal<string | null> = signal(this.secretService.getKey());
 	flashlightOn: boolean = false;
 
 	@HostBinding('style.--radius') radius: string = '0px';
@@ -28,13 +24,5 @@ export class AppComponent {
 		this.flashlightOn = !this.flashlightOn;
 		this.radius = this.flashlightOn ? '250px' : '0px';
 		this.cursor = this.flashlightOn ? 'auto' : 'none';
-	}
-
-	onInputClick(event: MouseEvent) {
-		event.stopPropagation();
-	}
-
-	onButtonClick(event: MouseEvent) {
-		event.stopPropagation();
 	}
 }
