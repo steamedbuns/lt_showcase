@@ -29,3 +29,7 @@ button {
 	border: #181818;
 	border-style: solid;
 }
+
+button:hover {
+	cursor: pointer;
+}
