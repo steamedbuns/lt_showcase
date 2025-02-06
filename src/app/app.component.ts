@@ -1,11 +1,11 @@
 import { Component, HostBinding } from '@angular/core';
-import { BaseHeaderComponent } from "./base-header/base-header.component";
+import { HomeComponent } from "./home/home.component";
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.css',
- 	imports: [BaseHeaderComponent]
+ 	imports: [HomeComponent]
 })
 export class AppComponent {
 	flashlightOn: boolean = false;

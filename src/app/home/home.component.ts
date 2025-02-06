@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { SecretService } from '../services/secret.service';
 
 @Component({
-  selector: 'app-base-header',
-  templateUrl: './base-header.component.html',
-  styleUrl: './base-header.component.css'
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css'
 })
-export class BaseHeaderComponent {
+export class HomeComponent {
 	private secretService = inject(SecretService);
 
 	onInputClick(event: MouseEvent) {
