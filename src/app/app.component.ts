@@ -1,4 +1,4 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { Component, HostBinding, WritableSignal, inject, signal } from '@angular/core';
 import { SecretService } from './services/secret.service';
 import { BaseHeaderComponent } from "./base-header/base-header.component";
 
@@ -11,6 +11,14 @@ import { BaseHeaderComponent } from "./base-header/base-header.component";
 export class AppComponent {
 	private secretService = inject(SecretService);
 
-	title: string = 'lt-showcase';
 	currentKey: WritableSignal<string | null> = signal(this.secretService.getKey());
+
+	@HostBinding('style.--radius') radius: string = '250px';
+	@HostBinding('style.--mouse-x') xPos: string = '0px';
+	@HostBinding('style.--mouse-y') yPos: string = '0px';
+
+	onMouseMove(event: MouseEvent) {
+		this.xPos = `${event.clientX}px`;
+		this.yPos = `${event.clientY}px`;
+	}
 }
