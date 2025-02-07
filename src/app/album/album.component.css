@@ -1,0 +1,12 @@
+.album-root {
+	height: 100vh;
+	width: 100%;
+	display: grid;
+	align-items: top;
+	justify-content: center;
+}
+
+.container {
+	display: block;
+	row-gap: 50px;
+}
