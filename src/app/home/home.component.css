@@ -19,12 +19,6 @@
 	row-gap: 50px;
 }
 
-h1 {
-	color: white;
-	margin: 0;
-	user-select: none;
-}
-
 label, input, button {
 	color: #181818;
 	background-color: #ffffff00;
