@@ -1,0 +1,14 @@
+<div class="album-container">
+	@for (photo of photos; track photo.photoId; let idx = $index) {
+		<img [src]="photo.url" [height]="200" [class.active]="selectionIndex() === idx"/>
+		<p [class.title-active]="selectionIndex() === idx">{{photo.title}}</p>
+	}
+
+	@if (photos.length > 1) {
+		<div class="selection-indicator-container">
+			@for (photo of photos; track photo.photoId; let idx = $index) {
+				<span class="selection-indicator" [class.indicator-active]="selectionIndex() === idx" (click)="selectionIndex.set(idx)"></span>
+			}
+		</div>
+	}
+</div>
