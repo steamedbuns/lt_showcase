@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, WritableSignal, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Album } from '../models/album';
+import { AlbumApiService } from '../services/album-api.service';
 
 @Component({
   selector: 'app-album',
@@ -9,16 +9,20 @@ import { Album } from '../models/album';
   styleUrl: './album.component.css'
 })
 export class AlbumComponent {
-	private httpClient = inject(HttpClient);
+	private albumService = inject(AlbumApiService);
 
-	albums: WritableSignal<Array<Album>> = signal([]);
+	busy = signal(true);
+	albums = signal(new Array<Album>);
 
-	fetchAlbums() {
-		this.httpClient.get<Array<Album>>('/albums').subscribe(this.gotAlbums);
-	}
-
-	gotAlbums(results: Array<Album>) {
-		this.albums.set(results);
-		console.log(results);
+	getAllALbums() {
+		this.busy.set(true);
+		this.albumService.getAllAlbums()
+			.subscribe((data) => {
+				if (data !== null)
+					this.albums.set(data);
+				else
+					console.error(`Error: ${this.albumService.lastErrorResponseCode}`);
+				this.busy.set(false);
+			});
 	}
 }
