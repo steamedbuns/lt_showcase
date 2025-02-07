@@ -1,11 +1,37 @@
 <div class="album-root">
-	<div class="container">
-		<div class="row">
-			<h1>Albums</h1>
+	@if (busy()) {
+		<div class="spinner-container">
+			<div class="spinner"></div>
 		</div>
-		<div class="row">
-			<button (click)="getAllALbums()">Get Albums</button>
-		</div>
-	</div>
+	}
+	@else {
+		<form>
+			<h4>Select Album</h4>
+			<mat-form-field>
+				<mat-label>Albums</mat-label>
+				<mat-select [(ngModel)]="selectedAlbum" name="albums" (selectionChange)="selectChanged()">
+					@for (album of albums; track album.albumId) {
+						<mat-option [value]="album">Album {{album.albumId}}</mat-option>
+					}
+				</mat-select>
+			</mat-form-field>
+		</form>
+	}
 </div>
-
+@if (!busy()) {
+	<div class="album-container">
+		@for (photo of selectedAlbum.photos; track photo.photoId; let idx = $index) {
+			<img [src]="photo.url" [height]="200" [class.active]="selectionIndex === idx"/>
+		}
+	
+		@if (selectedAlbum.photos.length > 1) {
+			<div class="selection-indicator-container">
+				@for (photo of selectedAlbum.photos; track photo.photoId; let idx = $index) {
+					<span class="selection-indicator" [class.indicator-active]="selectionIndex === idx" (click)="selectImage(idx)">
+	
+					</span>
+				}
+			</div>
+		}
+	</div>
+}
