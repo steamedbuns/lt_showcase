@@ -1,6 +1,6 @@
-export class Photo {
-	public photoId: number = -1;
-	public url: string = '';
-	public albumId: number = -1;
-	public title: string = '';
+export interface Photo {
+	photoId: number;
+	url: string;
+	albumId: number;
+	title: string;
 }
