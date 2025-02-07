@@ -1,14 +1,16 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
 import { Album } from '../models/album';
 import { AlbumApiService } from '../services/album-api.service';
+import { GalleryComponent } from "../gallery/gallery.component";
 
 @Component({
   selector: 'app-album',
-  imports: [FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule],
+  imports: [FormsModule, MatFormFieldModule, MatProgressBarModule, MatSelectModule, MatInputModule, GalleryComponent],
   templateUrl: './album.component.html',
   styleUrl: './album.component.css',
 })
@@ -19,35 +21,18 @@ export class AlbumComponent implements OnInit {
 	albums = new Array<Album>;
 
 	selectedAlbum: Album = this.albums[0];
-	selectionIndex = 0;
 
 	public ngOnInit(): void {
 		this.busy.set(true);
 		if (this.albums.length === 0) {
 			this.albumService.getAllAlbums()
 				.subscribe((data) => {
-					if (data !== null) {
-						this.albums = data;
-						this.albums.sort((a, b) => a.albumId - b.albumId);
-						this.albums.forEach(album => {
-							album.photos.sort((a, b) => a.photoId - b.photoId);
-						});
-						this.selectedAlbum = this.albums[0];
-					}
-					else
-						console.error(`Error: ${this.albumService.lastErrorResponseCode}`);
+					this.albums = data;
+					this.selectedAlbum = this.albums[0];
 					this.busy.set(false);
 				});
 		} else {
 			this.busy.set(false);
 		}
-	}
-
-	selectImage(idx: number) {
-		this.selectionIndex = idx;
-	}
-
-	selectChanged() {
-		this.selectionIndex = 0;
 	}
 }
