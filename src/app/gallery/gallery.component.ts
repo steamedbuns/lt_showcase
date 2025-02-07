@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, OnChanges, signal, SimpleChanges } from '@angular/core';
 import { Photo } from '../models/photo';
 
 @Component({
@@ -7,7 +7,11 @@ import { Photo } from '../models/photo';
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.css'
 })
-export class GalleryComponent {
+export class GalleryComponent implements OnChanges {
 	@Input({required: true}) photos!: Array<Photo>;
 	selectionIndex = signal(0);
+
+	ngOnChanges() {
+		this.selectionIndex.set(0);
+	}
 }
