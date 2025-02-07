@@ -1,0 +1,1 @@
+import{L as r}from"./chunk-GQR6CUWQ.js";var i=class e{SECRET_KEY="album_api_key";constructor(){}setKey(t){sessionStorage.setItem(this.SECRET_KEY,t)}getKey(){let t=sessionStorage.getItem(this.SECRET_KEY);return t??""}static \u0275fac=function(o){return new(o||e)};static \u0275prov=r({token:e,factory:e.\u0275fac,providedIn:"root"})};export{i as a};
