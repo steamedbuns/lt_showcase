@@ -1,7 +1,6 @@
 <div class="album-container">
 	@for (photo of photos; track photo.photoId; let idx = $index) {
-		<img [src]="photo.url" [height]="200" [class.active]="selectionIndex() === idx"/>
-		<p [class.title-active]="selectionIndex() === idx">{{photo.title}}</p>
+		<app-photo [photo]="photo" [active]="selectionIndex() === idx"></app-photo>
 	}
 
 	@if (photos.length > 1) {

@@ -1,9 +1,10 @@
-import { Component, Input, OnChanges, signal, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, signal } from '@angular/core';
 import { Photo } from '../models/photo';
+import { PhotoComponent } from './photo.component';
 
 @Component({
   selector: 'app-gallery',
-  imports: [],
+  imports: [PhotoComponent],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.css'
 })
