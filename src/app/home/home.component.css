@@ -14,11 +14,6 @@
 	cursor: var(--cursor);
 }
 
-.container {
-	display: grid;
-	row-gap: 50px;
-}
-
 label, input, button {
 	color: #181818;
 	background-color: #ffffff00;
