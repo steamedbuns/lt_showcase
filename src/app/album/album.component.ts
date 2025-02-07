@@ -12,7 +12,7 @@ import { GalleryComponent } from "../gallery/gallery.component";
   selector: 'app-album',
   imports: [FormsModule, MatFormFieldModule, MatProgressBarModule, MatSelectModule, MatInputModule, GalleryComponent],
   templateUrl: './album.component.html',
-  styleUrl: './album.component.css',
+  styleUrl: './album.component.scss',
 })
 export class AlbumComponent implements OnInit {
 	private albumService = inject(AlbumApiService);

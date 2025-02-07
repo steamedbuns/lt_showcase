@@ -6,7 +6,7 @@ import { SecretService } from '../services/secret.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  styleUrl: './home.component.scss',
   imports: [FormsModule]
 })
 export class HomeComponent {

@@ -6,7 +6,7 @@ import { PhotoComponent } from './photo.component';
   selector: 'app-gallery',
   imports: [PhotoComponent],
   templateUrl: './gallery.component.html',
-  styleUrl: './gallery.component.css'
+  styleUrl: './gallery.component.scss'
 })
 export class GalleryComponent implements OnChanges {
 	@Input({required: true}) photos!: Array<Photo>;

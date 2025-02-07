@@ -6,7 +6,7 @@ import { Photo } from '../models/photo';
   selector: 'app-photo',
   imports: [MatProgressSpinnerModule],
   templateUrl: './photo.component.html',
-  styleUrl: './photo.component.css'
+  styleUrl: './photo.component.scss'
 })
 export class PhotoComponent {
 	@Input({required: true}) photo!: Photo;
