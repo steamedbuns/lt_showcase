@@ -33,7 +33,7 @@
 			<div class="col">
 				<label for="api-key">
 					Api Key:
-					<input id="api-key" type="text" (click)="onInputClick($event)" />
+					<input id="api-key" type="text" [(ngModel)]="secretApiKey" (click)="onInputClick($event)" />
 				</label>
 				<button (click)="onButtonClick($event)">Login</button>
 			</div>

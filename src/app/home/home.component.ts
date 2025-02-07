@@ -1,14 +1,17 @@
 import { Component, HostBinding, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { SecretService } from '../services/secret.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
+  imports: [FormsModule]
 })
 export class HomeComponent {
 	private secretService = inject(SecretService);
 	private flashlightOn: boolean = false;
+	secretApiKey: string = '';
 
 	@HostBinding('style.--radius') radius: string = '0px';
 	@HostBinding('style.--mouse-x') xPos: string = '0px';
@@ -31,7 +34,7 @@ export class HomeComponent {
 	}
 
 	onButtonClick(event: MouseEvent) {
-		console.log(this.secretService.getKey());
+		this.secretService.setKey(this.secretApiKey);
 		event.stopPropagation();
 	}
 }
