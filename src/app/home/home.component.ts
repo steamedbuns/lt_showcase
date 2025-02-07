@@ -1,5 +1,6 @@
 import { Component, HostBinding, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SecretService } from '../services/secret.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { SecretService } from '../services/secret.service';
   imports: [FormsModule]
 })
 export class HomeComponent {
+	private router = inject(Router);
 	private secretService = inject(SecretService);
 	private flashlightOn: boolean = false;
 	secretApiKey = signal(this.secretService.getKey());
@@ -35,6 +37,7 @@ export class HomeComponent {
 
 	onButtonClick(event: MouseEvent) {
 		this.secretService.setKey(this.secretApiKey());
+		this.router.navigate(['/albums']);
 		event.stopPropagation();
 	}
 }
