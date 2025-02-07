@@ -40,7 +40,8 @@ export class AlbumApiService {
 				.reduce((photos, photo) => photos.concat(photo)))
 		);
 		if (searchString !== null)
-			return result.pipe(map(photos => photos.filter(photo => photo.title.includes(searchString))));
+			return result.pipe(map(photos => photos
+				.filter(photo => photo.title.toLowerCase().includes(searchString.toLowerCase()))));
 		return result;
 	}
 
