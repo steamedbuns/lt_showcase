@@ -18,7 +18,6 @@ export class GalleryComponent implements OnChanges {
 
 	@HostListener('document:keydown', ['$event'])
 	keyPressed(event: KeyboardEvent): void {
-		console.log(`User pressed:${event.key}`);
 		if (event.key == 'ArrowLeft') {
 			if (this.selectionIndex() - 1 < 0) {
 				this.selectionIndex.set(this.photos.length - 1);
