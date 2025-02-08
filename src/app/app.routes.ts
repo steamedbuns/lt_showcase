@@ -13,5 +13,11 @@ export const routes: Routes = [
 		loadComponent: () => {
 			return import('./album/album.component').then((module) => module.AlbumComponent)
 		}
+	},
+	{
+		path: 'all-photos',
+		loadComponent: () => {
+			return import('./all-photos/all-photos.component').then((module) => module.AllPhotosComponent)
+		}
 	}
 ];
