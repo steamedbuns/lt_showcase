@@ -23,9 +23,11 @@ options:
 
 ### Running locally
 
-`npm install`
+Install dependencies `npm install`
 
-`ng serve`
+Serve app locally `ng serve`
+
+Run unit test `ng test`
 
 ### Github Pages
 

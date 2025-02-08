@@ -6,7 +6,7 @@
 		<form>
 			<mat-form-field>
 				<mat-label>Search</mat-label>
-				<input matInput type="tel" placeholder="Filter..." [(ngModel)]="searchString" (keyup)="onKeyPressed($event)" name="search" />
+				<input matInput type="search" placeholder="Filter..." [(ngModel)]="searchString" (keyup)="onKeyPressed($event)" name="search" />
 			</mat-form-field>
 		</form>
 		<button mat-button (click)="viewAlbums()">View Albums</button>
