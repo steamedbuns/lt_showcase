@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, signal } from '@angular/core';
+import { Component, HostListener, Input, OnChanges, signal } from '@angular/core';
 import { Photo } from '../models/photo';
 import { PhotoComponent } from './photo.component';
 
@@ -14,5 +14,28 @@ export class GalleryComponent implements OnChanges {
 
 	ngOnChanges() {
 		this.selectionIndex.set(0);
+	}
+
+	@HostListener('document:keydown', ['$event'])
+	keyPressed(event: KeyboardEvent): void {
+		console.log(`User pressed:${event.key}`);
+		if (event.key == 'ArrowLeft') {
+			if (this.selectionIndex() - 1 < 0) {
+				this.selectionIndex.set(this.photos.length - 1);
+			}
+			else {
+				this.selectionIndex.set(this.selectionIndex() - 1);
+			}
+			event.stopPropagation();
+		}
+		if (event.key == 'ArrowRight') {
+			if (this.selectionIndex() + 1 >= this.photos.length) {
+				this.selectionIndex.set(0);
+			}
+			else {
+				this.selectionIndex.set(this.selectionIndex() + 1);
+			}
+			event.stopPropagation();
+		}
 	}
 }
