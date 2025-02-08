@@ -35,4 +35,5 @@ https://steamedbuns.github.io/lt_showcase
 
 * Left click to enable flashlight.
 * In the album view, use the drop down to select an album.
-* In the all photos view, use the search box to filter by photo title.
+* In the all photos view, use the search box to filter by photo title. Press enter in input box to search.
+* The photos can be navigated using keyboard arrow keys <- ->.
