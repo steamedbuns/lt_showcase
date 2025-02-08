@@ -2,9 +2,8 @@
 	<mat-progress-bar mode="query"></mat-progress-bar>
 }
 @else {
-<div class="album-root">
+	<div class="album-root">
 		<form>
-			<h4>Select Album</h4>
 			<mat-form-field>
 				<mat-label>Albums</mat-label>
 				<mat-select [(ngModel)]="selectedAlbum" name="albums">
@@ -14,6 +13,7 @@
 				</mat-select>
 			</mat-form-field>
 		</form>
-</div>
-<app-gallery [photos]="selectedAlbum.photos"></app-gallery>
+		<button mat-button (click)="viewAllPhotos()">View All Photos</button>
+	</div>
+	<app-gallery [photos]="selectedAlbum.photos"></app-gallery>
 }
