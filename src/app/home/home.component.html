@@ -35,11 +35,13 @@
 		</div>
 		<div class="row">
 			<div class="col">
-				<label for="api-key">
-					Api Key:
-					<input id="api-key" type="text" spellcheck="false" [(ngModel)]="secretApiKey" (click)="onInputClick($event)" />
-				</label>
-				<button (click)="onButtonClick($event)">Login</button>
+				<form>
+					<label for="api-key">
+						Api Key:
+						<input id="api-key" name="secret-input" type="text" spellcheck="false" [(ngModel)]="secretApiKey" (click)="onInputClick($event)" />
+					</label>
+					<button (click)="onButtonClick($event)">Login</button>
+				</form>
 			</div>
 		</div>
 	</div>
