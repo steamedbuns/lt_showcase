@@ -14,15 +14,12 @@ export class AlbumApiService {
 	private albumCache: Array<Album> = new Array<Album>;
 	private photoCache: Array<Photo> = new Array<Photo>;
 
-	lastErrorResponseCode: number = 0;
-
 	getAllAlbums(): Observable<Array<Album>> {
 		if (this.albumCache.length > 0) {
 			return of(this.albumCache);
 		}
 		let result = this.httpClient.get<Array<Album>>(this.API_URL + '/albums')
 			.pipe(catchError(error => {
-				this.lastErrorResponseCode = error.status;
 				return of(new Array<Album>);
 			}));
 		result.subscribe((data: Array<Album>) => {
@@ -49,7 +46,6 @@ export class AlbumApiService {
 	getAlbum(albumId: number): Observable<Album | null> {
 		return this.httpClient.get<Album>(this.API_URL + `/albums/${albumId}`)
 		.pipe(catchError(error => {
-			this.lastErrorResponseCode = error.status;
 			return of(null);
 		}));
 	}
@@ -58,7 +54,6 @@ export class AlbumApiService {
 	getPhoto(photoId: number): Observable<Photo | null> {
 		return this.httpClient.get<Photo>(this.API_URL + `/photos/${photoId}`)
 		.pipe(catchError(error => {
-			this.lastErrorResponseCode = error.status;
 			return of(null);
 		}));
 	}
