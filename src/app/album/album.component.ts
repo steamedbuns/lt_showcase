@@ -32,8 +32,12 @@ export class AlbumComponent implements OnInit {
 		if (this.albums.length === 0) {
 			this.albumService.getAllAlbums()
 				.subscribe((data) => {
-					this.albums = data;
-					this.selectedAlbum = this.albums[0];
+					if (data.length > 0) {
+						this.albums = data;
+						this.selectedAlbum = this.albums[0];
+					} else {
+						this.router.navigate(['']);
+					}
 					this.busy.set(false);
 				});
 		} else {

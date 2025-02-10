@@ -31,7 +31,11 @@ export class AllPhotosComponent implements OnInit {
 		if (this.photos.length === 0) {
 			this.albumService.getAllPhotos(this.searchString)
 				.subscribe((data) => {
-					this.photos = data;
+					if (data.length > 0) {
+						this.photos = data;
+					} else {
+						this.router.navigate(['']);
+					}
 					this.busy.set(false);
 				});
 		} else {
