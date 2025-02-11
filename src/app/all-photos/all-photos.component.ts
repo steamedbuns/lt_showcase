@@ -29,10 +29,12 @@ export class AllPhotosComponent implements OnInit {
 	ngOnInit(): void {
 		this.busy.set(true);
 		if (this.photos.length === 0) {
-			this.albumService.getAllPhotos(this.searchString)
+			this.albumService.getAllPhotos()
 				.subscribe((data) => {
 					if (data.length > 0) {
 						this.photos = data;
+						this.filteredPhotos = this.photos.filter(photo =>
+							photo.title.toLowerCase().includes(this.searchString.toLowerCase()));
 					} else {
 						this.router.navigate(['']);
 					}
@@ -45,10 +47,8 @@ export class AllPhotosComponent implements OnInit {
 
 	onKeyPressed(event: KeyboardEvent): void {
 		if (event.key == 'Enter') {
-			this.albumService.getAllPhotos(this.searchString)
-				.subscribe((data) => {
-					this.photos = data;
-				});
+			this.filteredPhotos = this.photos.filter(photo =>
+				photo.title.toLowerCase().includes(this.searchString.toLowerCase()));
 		}
 	}
 
