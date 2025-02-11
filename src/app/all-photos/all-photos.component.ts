@@ -22,7 +22,7 @@ export class AllPhotosComponent implements OnInit {
 	private albumService = inject(AlbumApiService);
 
 	busy = signal(false);
-	photos!: Array<Photo>;
+	photos: Array<Photo> = new Array<Photo>;
 	filteredPhotos!: Array<Photo>;
 	searchString: string = '';
 
