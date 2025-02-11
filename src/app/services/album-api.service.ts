@@ -11,41 +11,26 @@ export class AlbumApiService {
 	private API_URL: string = 'https://showcase.leantechniques.com';
 	private httpClient = inject(HttpClient);
 
-	private albumCache: Array<Album> = new Array<Album>;
-	private photoCache: Array<Photo> = new Array<Photo>;
-
+	// Get all albums from api.
 	getAllAlbums(): Observable<Array<Album>> {
-		if (this.albumCache.length > 0) {
-			return of(this.albumCache);
-		}
-		let result = this.httpClient.get<Array<Album>>(this.API_URL + '/albums')
-			.pipe(catchError(error => {
+		return this.httpClient.get<Array<Album>>(this.API_URL + '/albums')
+			.pipe(catchError(() => {
 				return of(new Array<Album>);
 			}));
-		result.subscribe((data: Array<Album>) => {
-			this.albumCache = data;
-		});
-		return result;
 	}
 
-	getAllPhotos(searchString: string | null = null): Observable<Array<Photo>> {
-		if (this.photoCache.length > 0) {
-			return of(this.photoCache);
-		}
-		let result = this.getAllAlbums().pipe(
+	// Get all albums and extract all photos as single array.
+	getAllPhotos(): Observable<Array<Photo>> {
+		return this.getAllAlbums().pipe(
 			map(albums => albums.map(album => album.photos)
 				.reduce((photos, photo) => photos.concat(photo)))
 		);
-		if (searchString !== null)
-			return result.pipe(map(photos => photos
-				.filter(photo => photo.title.toLowerCase().includes(searchString.toLowerCase()))));
-		return result;
 	}
 
 	// Implemented for completeness of api, but unused by application.
 	getAlbum(albumId: number): Observable<Album | null> {
 		return this.httpClient.get<Album>(this.API_URL + `/albums/${albumId}`)
-		.pipe(catchError(error => {
+		.pipe(catchError(() => {
 			return of(null);
 		}));
 	}
@@ -53,7 +38,7 @@ export class AlbumApiService {
 	// Implemented for completeness of api, but unused by application.
 	getPhoto(photoId: number): Observable<Photo | null> {
 		return this.httpClient.get<Photo>(this.API_URL + `/photos/${photoId}`)
-		.pipe(catchError(error => {
+		.pipe(catchError(() => {
 			return of(null);
 		}));
 	}

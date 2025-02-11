@@ -4,8 +4,9 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { Album } from '../models/album';
 import { Photo } from '../models/photo';
+import { firstValueFrom } from 'rxjs';
 
-function getTestPhoto(len: number): Array<Photo> {
+function getTestPhotos(len: number): Array<Photo> {
 	let result: Array<Photo> = new Array<Photo>(len);
 	for(let i = 0; i < len; ++i) {
 		result[i] = {photoId: i, url: 'fake/url', albumId: i, title: `fake title ${i}`};
@@ -13,10 +14,10 @@ function getTestPhoto(len: number): Array<Photo> {
 	return result;
 }
 
-function getTestAlbum(len: number): Array<Album> {
+function getTestAlbums(len: number): Array<Album> {
 	let result: Array<Album> = new Array<Album>(len);
 	for(let i = 0; i < len; ++i) {
-		result[i] = { albumId: i, photos: getTestPhoto(len)};
+		result[i] = { albumId: i, photos: []};
 	}
 	return result;
 }
@@ -24,7 +25,7 @@ function getTestAlbum(len: number): Array<Album> {
 describe('AlbumApiService', () => {
 	let httpTesting: HttpTestingController;
 	let service: AlbumApiService;
-	const ALBUM_URL = 'https://showcase.leantechniques.com/albums'
+	const ALBUM_URL = 'https://showcase.leantechniques.com/albums';
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -37,57 +38,48 @@ describe('AlbumApiService', () => {
 		service = TestBed.inject(AlbumApiService);
 	});
 
+	afterEach(() => {
+		httpTesting.verify();
+	})
+
 	it('should be created', () => {
 		expect(service).toBeTruthy();
 	});
 
-	it('expect one album request', () => {
-		service.getAllAlbums();
-		let req = httpTesting.expectOne(ALBUM_URL);
-		expect(req.request.method).toBe('GET');
-	});
+	it('get all album happy path', async () => {
+		const result = service.getAllAlbums();
+		const resultPromise = firstValueFrom(result);
+		const req = httpTesting.expectOne({method: 'GET', url: ALBUM_URL});
 
-	it('multiple call single album request after cache', () => {
-		let result = service.getAllAlbums();
-		let req = httpTesting.expectOne(ALBUM_URL);
-
-		expect(req.request.method).toBe('GET');
-
-		const expected = getTestAlbum(1);
+		const expected = getTestAlbums(5);
 		req.flush(expected);
 
-		result.subscribe((data) => expect(data).toEqual(expected));
-
-		result = service.getAllAlbums();
-		result = service.getAllAlbums();
-		result = service.getAllAlbums();
-		result = service.getAllAlbums();
-		httpTesting.expectOne(ALBUM_URL);
+		expect(await resultPromise).toEqual(expected);
 	});
 
-	it('expect one album request to get all photos', () => {
-		let result = service.getAllPhotos(null);
-		let req = httpTesting.expectOne(ALBUM_URL);
+	it('get all album unauthorized empty result', async () => {
+		const result = service.getAllAlbums();
+		const resultPromise = firstValueFrom(result);
+		const req = httpTesting.expectOne({method: 'GET', url: ALBUM_URL});
 
-		expect(req.request.method).toBe('GET');
+		const expected: Array<Album> = [];
+		req.flush('{"message":"Forbidden"}', {status: 403, statusText: 'Forbidden'});
 
-		const albums = getTestAlbum(1);
+		expect(await resultPromise).toEqual(expected);
+	});
+
+	it('expect one album request when get all photos', async () => {
+		const result = service.getAllPhotos();
+		const resultPromise = firstValueFrom(result);
+		const req = httpTesting.expectOne({method: 'GET', url: ALBUM_URL});
+
+		const albums = getTestAlbums(10);
+		for(let i = 0; i < albums.length; ++i) {
+			albums[i].photos = getTestPhotos(5);
+		}
 		const expected = albums.map(album => album.photos).reduce((photos, photo) => photos.concat(photo));
 		req.flush(albums);
 
-		result.subscribe((data) => expect(data).toEqual(expected));
-	});
-
-	it('all photos search string', () => {
-		let result = service.getAllPhotos('fake title 0');
-		let req = httpTesting.expectOne(ALBUM_URL);
-
-		expect(req.request.method).toBe('GET');
-
-		const albums = getTestAlbum(2);
-		const expected = albums.map(album => album.photos).reduce((photos, photo) => photos.concat(photo));
-		req.flush(albums);
-
-		result.subscribe((data) => expect(data.length).toEqual(2));
+		expect(await resultPromise).toEqual(expected);
 	});
 });
