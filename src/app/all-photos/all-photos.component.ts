@@ -22,9 +22,9 @@ export class AllPhotosComponent implements OnInit {
 	private albumService = inject(AlbumApiService);
 
 	busy = signal(false);
-	photos = new Array<Photo>;
-
-	searchString: string | null = null;
+	photos!: Array<Photo>;
+	filteredPhotos!: Array<Photo>;
+	searchString: string = '';
 
 	ngOnInit(): void {
 		this.busy.set(true);

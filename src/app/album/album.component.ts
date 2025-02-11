@@ -23,9 +23,8 @@ export class AlbumComponent implements OnInit {
 	private albumService = inject(AlbumApiService);
 
 	busy = signal(false);
-	albums = new Array<Album>;
-
-	selectedAlbum: Album = this.albums[0];
+	albums!: Array<Album>;
+	selectedAlbum!: Album;
 
 	ngOnInit(): void {
 		this.busy.set(true);
